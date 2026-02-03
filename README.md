@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Typing Speed Tester
 
 A modern, responsive web application for testing and improving typing speed and accuracy.
@@ -104,3 +105,7 @@ Then navigate to `http://localhost:8000` in your browser.
 ## License
 
 This project is open source and available under the MIT License.
+=======
+# Typing-Speed-Tester
+A modern, responsive web application for testing and improving typing speed and accuracy.
+>>>>>>> 03117dd85e8bcf80a93b1afa7f15f3154f9389e2
