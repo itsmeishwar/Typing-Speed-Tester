@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Typing Speed Tester</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Typing Speed Tester</h1>
+            <p>Test and improve your typing speed and accuracy</p>
+        </header>
+
+        <main>
+            <!-- Configuration Section -->
+            <section id="configuration" class="config-section">
+                <h2>Test Settings</h2>
+                
+                <div class="config-group">
+                    <label for="testMode">Test Mode:</label>
+                    <select id="testMode">
+                        <option value="time">Time-based</option>
+                        <option value="words">Word Count</option>
+                    </select>
+                </div>
+
+                <div class="config-group">
+                    <label for="duration">Duration:</label>
+                    <select id="duration">
+                        <option value="30">30 seconds</option>
+                        <option value="60" selected>1 minute</option>
+                        <option value="120">2 minutes</option>
+                        <option value="180">3 minutes</option>
+                        <option value="300">5 minutes</option>
+                        <option value="600">10 minutes</option>
+                    </select>
+                </div>
+
+                <div class="config-group" id="wordCountGroup" style="display: none;">
+                    <label for="wordCount">Word Count:</label>
+                    <select id="wordCount">
+                        <option value="25">25 words</option>
+                        <option value="50" selected>50 words</option>
+                        <option value="100">100 words</option>
+                        <option value="200">200 words</option>
+                    </select>
+                </div>
+
+                <div class="config-group">
+                    <label for="difficulty">Difficulty:</label>
+                    <select id="difficulty">
+                        <option value="beginner">Beginner</option>
+                        <option value="intermediate" selected>Intermediate</option>
+                        <option value="advanced">Advanced</option>
+                    </select>
+                </div>
+
+                <button id="startBtn" class="primary-btn">Start Test</button>
+            </section>
+
+            <!-- Test Section -->
+            <section id="testSection" class="test-section" style="display: none;">
+                <!-- Live Statistics -->
+                <div class="stats-panel">
+                    <div class="stat-item">
+                        <span class="stat-label">Time:</span>
+                        <span id="timerDisplay" class="stat-value">1:00</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">WPM:</span>
+                        <span id="wpmDisplay" class="stat-value">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Accuracy:</span>
+                        <span id="accuracyDisplay" class="stat-value">100%</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Errors:</span>
+                        <span id="errorsDisplay" class="stat-value">0</span>
+                    </div>
+                </div>
+
+                <!-- Text Display Area -->
+                <div class="text-container">
+                    <div id="textDisplay" class="text-display">
+                        <!-- Text will be generated and displayed here -->
+                    </div>
+                </div>
+
+                <!-- Input Area -->
+                <div class="input-container">
+                    <textarea 
+                        id="textInput" 
+                        class="text-input" 
+                        placeholder="Click here and start typing..."
+                        autocomplete="off"
+                        autocorrect="off"
+                        autocapitalize="off"
+                        spellcheck="false"
+                    ></textarea>
+                </div>
+
+                <div class="test-controls">
+                    <button id="resetBtn" class="secondary-btn">Reset Test</button>
+                    <button id="pauseBtn" class="secondary-btn">Pause</button>
+                </div>
+            </section>
+
+            <!-- Results Section -->
+            <section id="resultsSection" class="results-section" style="display: none;">
+                <h2>Test Results</h2>
+                
+                <div class="results-grid">
+                    <div class="result-card">
+                        <h3>Speed</h3>
+                        <div class="result-value">
+                            <span id="finalWPM">0</span>
+                            <small>WPM</small>
+                        </div>
+                    </div>
+                    
+                    <div class="result-card">
+                        <h3>Accuracy</h3>
+                        <div class="result-value">
+                            <span id="finalAccuracy">0</span>
+                            <small>%</small>
+                        </div>
+                    </div>
+                    
+                    <div class="result-card">
+                        <h3>Characters</h3>
+                        <div class="result-value">
+                            <span id="finalCPM">0</span>
+                            <small>CPM</small>
+                        </div>
+                    </div>
+                    
+                    <div class="result-card">
+                        <h3>Errors</h3>
+                        <div class="result-value">
+                            <span id="finalErrors">0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="results-details">
+                    <h3>Performance Details</h3>
+                    <table class="results-table">
+                        <tr>
+                            <td>Total Characters Typed:</td>
+                            <td id="totalChars">0</td>
+                        </tr>
+                        <tr>
+                            <td>Correct Characters:</td>
+                            <td id="correctChars">0</td>
+                        </tr>
+                        <tr>
+                            <td>Time Taken:</td>
+                            <td id="timeTaken">0s</td>
+                        </tr>
+                        <tr>
+                            <td>Raw WPM:</td>
+                            <td id="rawWPM">0</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="results-actions">
+                    <button id="retryBtn" class="primary-btn">Try Again</button>
+                    <button id="newTestBtn" class="secondary-btn">New Test</button>
+                    <button id="historyBtn" class="secondary-btn">View History</button>
+                </div>
+            </section>
+
+            <!-- History Section -->
+            <section id="historySection" class="history-section" style="display: none;">
+                <h2>Test History</h2>
+                <div id="historyList" class="history-list">
+                    <!-- History items will be displayed here -->
+                </div>
+                <div class="history-actions">
+                    <button id="clearHistoryBtn" class="danger-btn">Clear History</button>
+                    <button id="backFromHistoryBtn" class="secondary-btn">Back</button>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>&copy; 2026 Typing Speed Tester. Improve your typing skills.</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
